@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public static Player Intance { get; set; }
 
     [SerializeField]
     private float moveSpeed = 7f;
@@ -15,17 +18,54 @@ public class Player : MonoBehaviour
     private float playerRadius = .7f;
     [SerializeField]
     private float playerHeight = 2f;
+    [SerializeField]
+    private float interactDistance = 2f;
+    [SerializeField]
+    private LayerMask counterLayerMask;
+
+    private Vector3 lookingDirection = Vector3.zero;
 
     [SerializeField]
     private GameInput gameInput;
 
+    private EmptyCounter selectedCounter;
+
     private bool isWalking;
 
+    public event EventHandler<OnSelectedCounterChangeEventArgs> OnSelectedCounterChange;
+
+    public class OnSelectedCounterChangeEventArgs : EventArgs
+    {
+        public EmptyCounter selectedCounter;
+    }
+
+
+    private void Awake()
+    {
+        if (Intance != null)
+        {
+            Debug.Log("More than one player");
+        }
+        Intance = this;
+    }
+    private void Start()
+    {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.Interact();
+        }
+    }
 
     // Update is called once per frame
     private void Update()
     {
         MovePlayer();
+        HandleInteractions();
     }
 
     private void MovePlayer()
@@ -33,6 +73,12 @@ public class Player : MonoBehaviour
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lookingDirection = moveDir;
+
+        }
 
         moveDir = MovementAfterCollisions(moveDir);
         transform.position += moveDir * moveSpeed * Time.deltaTime;
@@ -82,8 +128,38 @@ public class Player : MonoBehaviour
         return result;
     }
 
+    private void HandleInteractions()
+    {
+
+        if (Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, lookingDirection, out RaycastHit raycastHit, interactDistance, counterLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out EmptyCounter emptyCounter))
+            {
+                if (emptyCounter != selectedCounter)
+                {
+
+                    ChangeSelectedCounter(emptyCounter);
+                }
+            }
+            else
+            {
+                ChangeSelectedCounter(null);
+            }
+        }
+        else if (selectedCounter != null)
+        {
+            ChangeSelectedCounter(null);
+        }
+    }
+
     public bool IsWalking()
     {
         return isWalking;
+    }
+
+    private void ChangeSelectedCounter(EmptyCounter emptyCounter)
+    {
+        selectedCounter = emptyCounter;
+        OnSelectedCounterChange?.Invoke(this, new OnSelectedCounterChangeEventArgs { selectedCounter = emptyCounter });
     }
 }
