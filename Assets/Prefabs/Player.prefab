@@ -131,7 +131,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gameInput: {fileID: 1535416201281339034}
-  playerTopPoint: {fileID: 3066884850193583510}
+  playerHoldPoint: {fileID: 3066884850193583510}
 --- !u!1001 &9088326112917055080
 PrefabInstance:
   m_ObjectHideFlags: 0

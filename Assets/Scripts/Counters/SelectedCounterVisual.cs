@@ -7,7 +7,7 @@ public class SelectedCounterVisual : MonoBehaviour
 {
 
     [SerializeField]
-    private EmptyCounter emptyCounter;
+    private BaseCounter baseCounter;
     [SerializeField]
     private GameObject visualGameObject;
 
@@ -18,6 +18,6 @@ public class SelectedCounterVisual : MonoBehaviour
 
     private void Player_OnSelectedCounterChange(object sender, Player.OnSelectedCounterChangeEventArgs e)
     {
-        visualGameObject.SetActive(e.selectedCounter == emptyCounter);
+        visualGameObject.SetActive(e.selectedCounter == baseCounter);
     }
 }

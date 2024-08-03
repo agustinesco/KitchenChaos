@@ -33,7 +33,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private KitchenObject currentKitchenObject;
 
-    private EmptyCounter selectedCounter;
+    private BaseCounter selectedCounter;
 
     private bool isWalking;
 
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     public class OnSelectedCounterChangeEventArgs : EventArgs
     {
-        public EmptyCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
 
@@ -138,12 +138,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
         if (Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, lookingDirection, out RaycastHit raycastHit, interactDistance, counterLayerMask))
         {
-            if (raycastHit.transform.TryGetComponent(out EmptyCounter emptyCounter))
+            if (raycastHit.transform.TryGetComponent(out BaseCounter BaseCounter))
             {
-                if (emptyCounter != selectedCounter)
+                if (BaseCounter != selectedCounter)
                 {
 
-                    ChangeSelectedCounter(emptyCounter);
+                    ChangeSelectedCounter(BaseCounter);
                 }
             }
             else
@@ -162,10 +162,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         return isWalking;
     }
 
-    private void ChangeSelectedCounter(EmptyCounter emptyCounter)
+    private void ChangeSelectedCounter(BaseCounter BaseCounter)
     {
-        selectedCounter = emptyCounter;
-        OnSelectedCounterChange?.Invoke(this, new OnSelectedCounterChangeEventArgs { selectedCounter = emptyCounter });
+        selectedCounter = BaseCounter;
+        OnSelectedCounterChange?.Invoke(this, new OnSelectedCounterChangeEventArgs { selectedCounter = BaseCounter });
     }
 
     public Transform GetTopPoint()
