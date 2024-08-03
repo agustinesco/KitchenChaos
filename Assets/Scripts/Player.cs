@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
 
     public static Player Intance { get; set; }
@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameInput gameInput;
+
+    [SerializeField]
+    private Transform playerHoldPoint;
+
+    private KitchenObject currentKitchenObject;
 
     private EmptyCounter selectedCounter;
 
@@ -57,7 +62,7 @@ public class Player : MonoBehaviour
     {
         if (selectedCounter != null)
         {
-            selectedCounter.Interact();
+            selectedCounter.Interact(this);
         }
     }
 
@@ -161,5 +166,25 @@ public class Player : MonoBehaviour
     {
         selectedCounter = emptyCounter;
         OnSelectedCounterChange?.Invoke(this, new OnSelectedCounterChangeEventArgs { selectedCounter = emptyCounter });
+    }
+
+    public Transform GetTopPoint()
+    {
+        return playerHoldPoint;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.currentKitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return currentKitchenObject;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return currentKitchenObject != null;
     }
 }
