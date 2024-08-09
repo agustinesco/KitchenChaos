@@ -13,6 +13,11 @@ public class BaseCounter : MonoBehaviour
     public virtual void Interact(Player player)
     {
 
+        Debug.Log("Interact");
+    }
+    public virtual void InteractAlternate(Player player)
+    {
+        Debug.Log("Interact Alternate");
     }
 
     public Transform GetTopPoint()

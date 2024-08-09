@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1357150911629857518, guid: dc2b6251be355c246b9e26a271fd33d1, type: 3}
       propertyPath: kitchenObjectSO
       value: 
-      objectReference: {fileID: 11400000, guid: 5e0df9c0682bf5848a201e2e85431f6a, type: 2}
+      objectReference: {fileID: 11400000, guid: 01f61bb24e8e3bf42aeb43ff02a150e8, type: 2}
     - target: {fileID: 1822606947669944387, guid: dc2b6251be355c246b9e26a271fd33d1, type: 3}
       propertyPath: m_Name
       value: ContainerCounterCheese

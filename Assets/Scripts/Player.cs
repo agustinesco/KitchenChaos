@@ -56,6 +56,15 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+    }
+
+    private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e)
@@ -106,7 +115,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
             bool movementCollidesXAxis = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveSpeed * Time.deltaTime);
 
-            if (!movementCollidesXAxis)
+            if (moveDir.x != 0 && !movementCollidesXAxis)
             {
                 result = moveDirX;
             }
@@ -117,7 +126,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
                 bool movementCollidesZAxis = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveSpeed * Time.deltaTime);
 
-                if (!movementCollidesZAxis)
+                if (moveDir.z != 0 && !movementCollidesZAxis)
                 {
                     result = moveDirZ;
                 }

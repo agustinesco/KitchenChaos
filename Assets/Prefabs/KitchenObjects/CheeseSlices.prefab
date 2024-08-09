@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6242591929667665601}
-  - component: {fileID: 4714336170628795481}
+  - component: {fileID: -2281093016938263829}
   m_Layer: 0
-  m_Name: UncoockedPatty
+  m_Name: CheeseSlices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,11 +29,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6553743290209424799}
+  - {fileID: 7550300945350588039}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4714336170628795481
+--- !u!114 &-2281093016938263829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,66 +45,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2188c5e504aadd49b99cd84f3cff198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenObjectSO: {fileID: 11400000, guid: 07c384db3d544fa468a74eb7ff2dfc8d, type: 2}
---- !u!1001 &7933545699196584735
+  kitchenObjectSO: {fileID: 11400000, guid: 5e0df9c0682bf5848a201e2e85431f6a, type: 2}
+--- !u!1001 &6638870724323991559
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 6242591929667665601}
     m_Modifications:
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812876574508226177, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
+    - target: {fileID: 3812876574508226177, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
       propertyPath: m_Name
-      value: MeatPattyUncooked_Visual
+      value: CheeseSlices_Visual
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
---- !u!4 &6553743290209424799 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
+--- !u!4 &7550300945350588039 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: 21b2fcdae015b8c4c83ff4b68b31b06f, type: 3}
-  m_PrefabInstance: {fileID: 7933545699196584735}
+  m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: 17cb28a1a37fd7f44ae6e1ad2aa9da78, type: 3}
+  m_PrefabInstance: {fileID: 6638870724323991559}
   m_PrefabAsset: {fileID: 0}
