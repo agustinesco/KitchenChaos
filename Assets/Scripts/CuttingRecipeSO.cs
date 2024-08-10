@@ -7,4 +7,6 @@ public class CuttingRecipeSO : ScriptableObject
 {
     public KitchenObjectSO output;
     public KitchenObjectSO input;
+
+    public int cuttingMin;
 }
