@@ -3,20 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoveCounter : BaseCounter, IKitchenObjectParent
+public class StoveCounter : BaseCounter, IKitchenObjectParent, IProgressable
 {
 
     [SerializeField] private FryingRecipeSO[] fryingRecipeSOArray;
 
     private float fryingProgress = 0f;
     private FryingRecipeSO currentFryingRecipe;
-    public EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
-    public class OnProgressChangedEventArgs : EventArgs
-    {
-        public float progress;
-    }
-    public EventHandler<OnStateChangedEventArgs> OnStateChanged;
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
 
     public class OnStateChangedEventArgs : EventArgs
     {
@@ -41,7 +37,7 @@ public class StoveCounter : BaseCounter, IKitchenObjectParent
         if (currentFryingRecipe != null)
         {
             fryingProgress += Time.deltaTime;
-            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { progress = currentFryingRecipe.fryingTimerMax / fryingProgress });
+            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = fryingProgress / currentFryingRecipe.fryingTimerMax });
             if (fryingProgress > currentFryingRecipe.fryingTimerMax)
             {
                 currentKitchenObject.DestroySelf();
@@ -82,7 +78,7 @@ public class StoveCounter : BaseCounter, IKitchenObjectParent
 
     private void ChangeCurrentRecipe(FryingRecipeSO newRecipe)
     {
-        OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { progress = 0 });
+        OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = 0 });
         fryingProgress = 0f;
         currentFryingRecipe = newRecipe;
         if (newRecipe != null)

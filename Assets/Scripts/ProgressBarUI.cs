@@ -6,17 +6,22 @@ using UnityEngine.UI;
 
 public class ProgressBarUI : MonoBehaviour
 {
-    [SerializeField] CuttingCounter cuttingCounter;
+    [SerializeField] private GameObject progressable;
     [SerializeField] private Image barImage;
 
     public void Start()
     {
-        cuttingCounter.OnProgressChanged += CuttingCounter_OnProgressChanged;
+        IProgressable progressableComponent = progressable.GetComponent<IProgressable>();
+        if (progressableComponent == null)
+        {
+            throw new Exception($"Component {progressable} has no deffinition for IProgress interface");
+        }
+        progressableComponent.OnProgressChanged += Progressable_OnProgressChanged;
         Hide();
 
     }
 
-    private void CuttingCounter_OnProgressChanged(object sender, CuttingCounter.OnProgressChangedEventArgs e)
+    private void Progressable_OnProgressChanged(object sender, IProgressable.OnProgressChangedEventArgs e)
     {
         barImage.fillAmount = e.progress;
         if (e.progress == 0f || e.progress == 1f)

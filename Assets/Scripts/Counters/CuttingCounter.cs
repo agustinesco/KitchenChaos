@@ -4,17 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter, IKitchenObjectParent
+public class CuttingCounter : BaseCounter, IKitchenObjectParent, IProgressable
 {
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
 
     public EventHandler OnCutPerformed;
-    public EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
-    public class OnProgressChangedEventArgs : EventArgs
-    {
-        public float progress;
-    }
     private int cuttingProgress = 0;
 
 
@@ -27,7 +23,7 @@ public class CuttingCounter : BaseCounter, IKitchenObjectParent
         else if (currentKitchenObject != null && !player.HasKitchenObject())
         {
             currentKitchenObject.SetParent(player);
-            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { progress = 0 });
+            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = 0 });
             cuttingProgress = 0;
         }
     }
@@ -41,7 +37,7 @@ public class CuttingCounter : BaseCounter, IKitchenObjectParent
             {
                 cuttingProgress++;
                 OnCutPerformed?.Invoke(this, EventArgs.Empty);
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs { progress = (float)cuttingProgress / currentCuttingRecipe.cuttingMin });
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = (float)cuttingProgress / currentCuttingRecipe.cuttingMin });
                 if (currentCuttingRecipe.cuttingMin <= cuttingProgress)
                 {
 
