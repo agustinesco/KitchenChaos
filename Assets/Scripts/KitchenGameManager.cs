@@ -21,14 +21,44 @@ public class KitchenGameManager : MonoBehaviour
     private float gamePlayingTimer = 10f;
     private float gamePlayingTimerMax = 10f;
 
-    public event EventHandler OnStateChange;
+    private bool paused = false;
 
+    public event EventHandler OnStateChange;
+    public event EventHandler<OnPauseToggleEventArgs> OnPauseToggle;
+    public class OnPauseToggleEventArgs : EventArgs
+    {
+        public bool paused;
+    }
 
     private void Awake()
     {
         state = State.WaitingToStart;
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
+    {
+        TogglePauseGame();
+    }
+
+    public void TogglePauseGame()
+    {
+        paused = !paused;
+        OnPauseToggle?.Invoke(this, new OnPauseToggleEventArgs { paused = paused });
+        if (paused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     private void Update()

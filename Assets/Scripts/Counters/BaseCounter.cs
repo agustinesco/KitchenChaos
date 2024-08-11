@@ -13,6 +13,11 @@ public class BaseCounter : MonoBehaviour
     protected KitchenObject currentKitchenObject;
     public static event EventHandler OnObjectDrop;
 
+    public static void ResetStaticData()
+    {
+        OnObjectDrop = null;
+    }
+
     public virtual void Interact(Player player)
     {
 

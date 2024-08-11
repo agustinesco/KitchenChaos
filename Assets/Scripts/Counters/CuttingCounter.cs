@@ -15,6 +15,11 @@ public class CuttingCounter : BaseCounter, IKitchenObjectParent, IProgressable
     public static event EventHandler OnAnyCut;
 
 
+    new public static void ResetStaticData()
+    {
+        OnAnyCut = null;
+    }
+
     public override void Interact(Player player)
     {
         if (currentKitchenObject == null && player.HasKitchenObject())
