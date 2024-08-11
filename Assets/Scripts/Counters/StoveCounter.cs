@@ -56,10 +56,21 @@ public class StoveCounter : BaseCounter, IKitchenObjectParent, IProgressable
             ChangeCurrentRecipe(newFryingRecipe);
             player.GetKitchenObject().SetParent(this);
         }
-        else if (currentKitchenObject != null && !player.HasKitchenObject())
+        else if (currentKitchenObject != null)
         {
-            currentKitchenObject.SetParent(player);
-            ChangeCurrentRecipe(null);
+            if (player.GetKitchenObject() != null && player.GetKitchenObject().TryGetPlate(out PlateKitchenObject playerPlateKitchenObject))
+            {
+                if (playerPlateKitchenObject.TryAddingIngredient(currentKitchenObject.GetKitchenObjectSO()))
+                {
+                    currentKitchenObject.DestroySelf();
+                    ChangeCurrentRecipe(null);
+                }
+            }
+            else if (player.GetKitchenObject() == null)
+            {
+                currentKitchenObject.SetParent(player);
+                ChangeCurrentRecipe(null);
+            }
         }
     }
 

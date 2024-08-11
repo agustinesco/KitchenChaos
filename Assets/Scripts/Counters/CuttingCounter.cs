@@ -20,11 +20,23 @@ public class CuttingCounter : BaseCounter, IKitchenObjectParent, IProgressable
         {
             player.GetKitchenObject().SetParent(this);
         }
-        else if (currentKitchenObject != null && !player.HasKitchenObject())
+        else if (currentKitchenObject != null)
         {
-            currentKitchenObject.SetParent(player);
-            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = 0 });
-            cuttingProgress = 0;
+            if (player.GetKitchenObject() != null && player.GetKitchenObject().TryGetPlate(out PlateKitchenObject playerPlateKitchenObject))
+            {
+                if (playerPlateKitchenObject.TryAddingIngredient(currentKitchenObject.GetKitchenObjectSO()))
+                {
+                    currentKitchenObject.DestroySelf();
+                    OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = 0 });
+                    cuttingProgress = 0;
+                }
+            }
+            else if (player.GetKitchenObject() == null)
+            {
+                currentKitchenObject.SetParent(player);
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = 0 });
+                cuttingProgress = 0;
+            }
         }
     }
 

@@ -10,9 +10,27 @@ public class EmptyCounter : BaseCounter, IKitchenObjectParent
         {
             player.GetKitchenObject().SetParent(this);
         }
-        else if (currentKitchenObject != null && !player.HasKitchenObject())
+        else if (currentKitchenObject != null)
         {
-            currentKitchenObject.SetParent(player);
+            if (player.GetKitchenObject() != null && player.GetKitchenObject().TryGetPlate(out PlateKitchenObject playerPlateKitchenObject))
+            {
+                if (playerPlateKitchenObject.TryAddingIngredient(currentKitchenObject.GetKitchenObjectSO()))
+                {
+                    currentKitchenObject.DestroySelf();
+                }
+            }
+            else if (player.GetKitchenObject() != null && currentKitchenObject.TryGetPlate(out PlateKitchenObject counterPlateKitchenObject))
+            {
+                if (counterPlateKitchenObject.TryAddingIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
+                {
+                    player.GetKitchenObject().DestroySelf();
+                }
+
+            }
+            else if (player.GetKitchenObject() == null)
+            {
+                currentKitchenObject.SetParent(player);
+            }
         }
     }
 }
