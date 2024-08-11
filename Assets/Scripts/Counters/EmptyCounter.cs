@@ -12,22 +12,26 @@ public class EmptyCounter : BaseCounter, IKitchenObjectParent
         }
         else if (currentKitchenObject != null)
         {
-            if (player.GetKitchenObject() != null && player.GetKitchenObject().TryGetPlate(out PlateKitchenObject playerPlateKitchenObject))
+            if (player.HasKitchenObject())
             {
-                if (playerPlateKitchenObject.TryAddingIngredient(currentKitchenObject.GetKitchenObjectSO()))
-                {
-                    currentKitchenObject.DestroySelf();
-                }
-            }
-            else if (player.GetKitchenObject() != null && currentKitchenObject.TryGetPlate(out PlateKitchenObject counterPlateKitchenObject))
-            {
-                if (counterPlateKitchenObject.TryAddingIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
-                {
-                    player.GetKitchenObject().DestroySelf();
-                }
 
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject playerPlateKitchenObject))
+                {
+                    if (playerPlateKitchenObject.TryAddingIngredient(currentKitchenObject.GetKitchenObjectSO()))
+                    {
+                        currentKitchenObject.DestroySelf();
+                    }
+                }
+                else if (currentKitchenObject.TryGetPlate(out PlateKitchenObject counterPlateKitchenObject))
+                {
+                    if (counterPlateKitchenObject.TryAddingIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        player.GetKitchenObject().DestroySelf();
+                    }
+
+                }
             }
-            else if (player.GetKitchenObject() == null)
+            else
             {
                 currentKitchenObject.SetParent(player);
             }
