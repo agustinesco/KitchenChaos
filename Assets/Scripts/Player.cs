@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IKitchenObjectParent
 {
 
-    public static Player Intance { get; set; }
+    public static Player Instance { get; set; }
 
     [SerializeField]
     private float moveSpeed = 7f;
@@ -44,14 +44,16 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         public BaseCounter selectedCounter;
     }
 
+    public event EventHandler OnPickUp;
+
 
     private void Awake()
     {
-        if (Intance != null)
+        if (Instance != null)
         {
             Debug.Log("More than one player");
         }
-        Intance = this;
+        Instance = this;
     }
     private void Start()
     {
@@ -185,6 +187,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.currentKitchenObject = kitchenObject;
+        if (kitchenObject != null)
+        {
+            OnPickUp?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public KitchenObject GetKitchenObject()

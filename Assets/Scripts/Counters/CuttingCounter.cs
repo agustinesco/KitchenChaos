@@ -12,6 +12,7 @@ public class CuttingCounter : BaseCounter, IKitchenObjectParent, IProgressable
     public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
     private int cuttingProgress = 0;
+    public static event EventHandler OnAnyCut;
 
 
     public override void Interact(Player player)
@@ -49,6 +50,7 @@ public class CuttingCounter : BaseCounter, IKitchenObjectParent, IProgressable
             {
                 cuttingProgress++;
                 OnCutPerformed?.Invoke(this, EventArgs.Empty);
+                OnAnyCut?.Invoke(this, EventArgs.Empty);
                 OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { progress = (float)cuttingProgress / currentCuttingRecipe.cuttingMin });
                 if (currentCuttingRecipe.cuttingMin <= cuttingProgress)
                 {
