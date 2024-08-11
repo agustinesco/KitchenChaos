@@ -19,6 +19,7 @@ public class KitchenGameManager : MonoBehaviour
     private float waitingToStartTimerS = 1f;
     private float CountdownToStartTimerS = 3f;
     private float gamePlayingTimer = 10f;
+    private float gamePlayingTimerMax = 10f;
 
     public event EventHandler OnStateChange;
 
@@ -73,6 +74,10 @@ public class KitchenGameManager : MonoBehaviour
     public float GetCountdownToStart()
     {
         return CountdownToStartTimerS;
+    }
+    public float GetPlayingTimerNormalized()
+    {
+        return 1 - (gamePlayingTimer / gamePlayingTimerMax);
     }
 
 }

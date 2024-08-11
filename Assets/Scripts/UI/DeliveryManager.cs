@@ -19,6 +19,8 @@ public class DeliveryManager : MonoBehaviour
     public event EventHandler OnRecipeDelivered;
     public event EventHandler OnRecipeFailed;
 
+    private int deliveredRecipesAmount = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -49,6 +51,7 @@ public class DeliveryManager : MonoBehaviour
                 waitingRecipeList.Remove(waitingRecipeSO);
                 OnRecipeChange?.Invoke(this, EventArgs.Empty);
                 OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
+                deliveredRecipesAmount++;
                 return;
             }
         }
@@ -58,5 +61,10 @@ public class DeliveryManager : MonoBehaviour
     public List<RecipeSO> GetWaitingRecipeList()
     {
         return waitingRecipeList;
+    }
+
+    public int GetDeliveredRecipesAmount()
+    {
+        return deliveredRecipesAmount;
     }
 }
